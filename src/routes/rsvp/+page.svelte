@@ -175,7 +175,6 @@
 										{:else}
 											{companionCount} acompanhantes
 										{/if}
-										<span class="block text-xs text-white/30">máximo de {maxCompanions}</span>
 									</p>
 									<div class="flex items-center gap-3">
 										<button
@@ -219,20 +218,6 @@
 									/>
 								</label>
 							{/each}
-
-							<label class="flex flex-col gap-2.5">
-								<span class="font-display text-sm font-semibold tracking-wide">
-									Restrições alimentares
-									<span class="ml-1 font-normal text-white/35">(opcional)</span>
-								</span>
-								<input
-									type="text"
-									name="dietaryRestrictions"
-									maxlength="500"
-									placeholder="Vegetariano, sem glúten, alergia a decepção…"
-									class="card-glass rounded-2xl px-5 py-4 text-base placeholder-white/25 transition-colors duration-300 outline-none focus:border-violet-400/60"
-								/>
-							</label>
 						</div>
 					{/if}
 

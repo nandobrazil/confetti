@@ -17,7 +17,6 @@ function buildSchema(maxCompanions: number) {
 			companionNames: z
 				.array(z.string().trim().min(2, 'Nome do acompanhante muito curto').max(120))
 				.max(maxCompanions, `Máximo de ${maxCompanions} acompanhantes`),
-			dietaryRestrictions: z.string().trim().max(500).optional(),
 			comments: z.string().trim().max(1000).optional()
 		})
 		.transform((data) => ({
@@ -42,7 +41,6 @@ export const actions: Actions = {
 				.getAll('companionName')
 				.map(String)
 				.filter((n) => n.trim().length > 0),
-			dietaryRestrictions: String(form.get('dietaryRestrictions') ?? '') || undefined,
 			comments: String(form.get('comments') ?? '') || undefined
 		};
 
@@ -54,14 +52,13 @@ export const actions: Actions = {
 			});
 		}
 
-		const { name, attending, companionNames, dietaryRestrictions, comments } = parsed.data;
+		const { name, attending, companionNames, comments } = parsed.data;
 
 		const [guest] = await db
 			.insert(guests)
 			.values({
 				name,
 				attending: attending === 'yes',
-				dietaryRestrictions: dietaryRestrictions ?? null,
 				comments: comments ?? null
 			})
 			.returning();

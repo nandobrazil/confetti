@@ -29,7 +29,6 @@ const updateSchema = z.object({
 	name: z.string().trim().min(2).max(120),
 	attending: z.enum(['yes', 'no']),
 	companionNames: z.array(z.string().trim().min(1).max(120)),
-	dietaryRestrictions: z.string().trim().max(500),
 	comments: z.string().trim().max(1000)
 });
 
@@ -46,7 +45,6 @@ export const actions: Actions = {
 				.getAll('companionName')
 				.map(String)
 				.filter((n) => n.trim().length > 0),
-			dietaryRestrictions: String(form.get('dietaryRestrictions') ?? ''),
 			comments: String(form.get('comments') ?? '')
 		});
 
@@ -54,14 +52,13 @@ export const actions: Actions = {
 			return fail(400, { error: parsed.error.issues[0]?.message ?? 'Dados inválidos' });
 		}
 
-		const { id, name, attending, companionNames, dietaryRestrictions, comments } = parsed.data;
+		const { id, name, attending, companionNames, comments } = parsed.data;
 
 		await db
 			.update(guests)
 			.set({
 				name,
 				attending: attending === 'yes',
-				dietaryRestrictions: dietaryRestrictions || null,
 				comments: comments || null,
 				updatedAt: new Date().toISOString().slice(0, 19).replace('T', ' ')
 			})

@@ -7,7 +7,6 @@ export type ExportRow = {
 	status: string;
 	companionCount: number;
 	companionNames: string;
-	dietaryRestrictions: string;
 	comments: string;
 	respondedAt: string;
 };
@@ -17,7 +16,6 @@ export const EXPORT_HEADERS: { key: keyof ExportRow; label: string }[] = [
 	{ key: 'status', label: 'Status' },
 	{ key: 'companionCount', label: 'Acompanhantes' },
 	{ key: 'companionNames', label: 'Nomes dos acompanhantes' },
-	{ key: 'dietaryRestrictions', label: 'Restrições alimentares' },
 	{ key: 'comments', label: 'Comentários' },
 	{ key: 'respondedAt', label: 'Respondido em' }
 ];
@@ -35,7 +33,6 @@ export async function fetchExportRows(): Promise<ExportRow[]> {
 			status: guest.attending ? 'Confirmado' : 'Não vai',
 			companionCount: names.length,
 			companionNames: names.join(', '),
-			dietaryRestrictions: guest.dietaryRestrictions ?? '',
 			comments: guest.comments ?? '',
 			respondedAt: guest.createdAt
 		};

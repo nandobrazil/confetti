@@ -9,11 +9,11 @@ export const DEFAULT_EVENT: Omit<EventConfig, 'id'> = {
 	venueName: 'Casa do aniversariante',
 	address: 'Rua dos Bons Momentos, 123 — São Paulo, SP',
 	mapsUrl: 'https://maps.google.com/?q=Av.+Paulista,+São+Paulo',
-	notes: 'Traga sua melhor história pra contar. Bebidas e comidas por nossa conta.',
+	notes: 'Vai ser churrasco, e ponto. A carne é por nossa conta — a bebida, cada um traz a sua.',
 	dressCode: 'Venha como quiser — de pijama a smoking, o importante é vir.',
-	heroTagline: 'Você foi oficialmente convocado para um sábado memorável — do meio-dia até a última história.',
-	successMessage: 'Presença registrada com sucesso. A festa acaba de ficar melhor.',
-	maxCompanions: 3,
+	heroTagline: 'Você foi oficialmente convocado para um churrasco memorável — do meio-dia até a última história.',
+	successMessage: 'Presença registrada com sucesso. O churrasco acaba de ficar melhor.',
+	maxCompanions: 10,
 	rsvpOpen: true
 };
 

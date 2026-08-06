@@ -11,12 +11,16 @@
 		{
 			question: 'Posso levar acompanhante?',
 			answer:
-				'Pode! O formulário deixa você adicionar acompanhantes (com limite, porque a casa não é um estádio). Só não esquece de colocar o nome de cada um.'
+				'Pode, e sem burocracia! Só adiciona o nome de cada um no formulário — é assim que a gente calcula a quantidade de carne. Matemática séria.'
 		},
 		{
 			question: 'Preciso levar alguma coisa?',
 			answer:
-				'Só você já basta. Mas se quiser trazer aquela sua energia de "última pessoa a ir embora", será muito bem-vinda.'
+				'Sim: a sua bebida. O churrasco é por nossa conta, o copo é responsabilidade de cada um. E se quiser trazer aquela energia de "última pessoa a ir embora", será muito bem-vinda.'
+		},
+		{
+			question: 'O que vai ter pra comer?',
+			answer: 'Churrasco. E ponto. Se essa resposta não te convenceu, a festa talvez não seja pra você (brincadeira, vem).'
 		},
 		{
 			question: 'E se eu confirmar e não puder ir?',
@@ -36,8 +40,8 @@
 
 	const stats = [
 		{ value: '87%', label: 'de aumento nas chances da festa ficar épica com a sua presença' },
-		{ value: '100%', label: 'de chance de ter comida boa e gente melhor ainda' },
-		{ value: '0', label: 'discursos longos e chatos (prometido em cartório)' }
+		{ value: '100%', label: 'de chance de churrasco no ponto e gente melhor ainda' },
+		{ value: '1', label: 'única tarefa sua: trazer a bebida que você gosta' }
 	];
 </script>
 
@@ -122,9 +126,9 @@
 				<span class="font-display flex gap-8 text-sm font-semibold tracking-widest text-white/25 uppercase">
 					<span>Missão: comer, beber, rir e criar histórias</span>
 					<span class="text-fuchsia-400/60">✦</span>
-					<span>Sem discurso de PowerPoint</span>
+					<span>Churrasco no capricho</span>
 					<span class="text-amber-300/60">✦</span>
-					<span>Dança questionável liberada</span>
+					<span>Traga sua bebida</span>
 					<span class="text-violet-400/60">✦</span>
 					<span>Presença > presente</span>
 					<span class="text-mint-400/60">✦</span>

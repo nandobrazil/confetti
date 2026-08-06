@@ -148,9 +148,6 @@
 								Com: {guest.companions.map((c) => c.name).join(', ')}
 							</p>
 						{/if}
-						{#if guest.dietaryRestrictions}
-							<p class="mt-1.5 text-sm text-amber-300/80">🥗 {guest.dietaryRestrictions}</p>
-						{/if}
 						{#if guest.comments}
 							<p class="mt-1.5 text-sm text-white/55 italic">“{guest.comments}”</p>
 						{/if}
@@ -279,16 +276,6 @@
 						{/each}
 					</div>
 				{/if}
-
-				<label class="flex flex-col gap-2">
-					<span class="text-sm font-medium text-white/70">Restrições alimentares</span>
-					<input
-						type="text"
-						name="dietaryRestrictions"
-						value={editing.dietaryRestrictions ?? ''}
-						class="card-glass rounded-xl px-4 py-3 outline-none transition-colors focus:border-violet-400/60"
-					/>
-				</label>
 
 				<label class="flex flex-col gap-2">
 					<span class="text-sm font-medium text-white/70">Comentários</span>
