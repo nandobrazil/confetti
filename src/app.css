@@ -1,0 +1,129 @@
+@import 'tailwindcss';
+
+@theme {
+	--font-display: 'Bricolage Grotesque Variable', system-ui, sans-serif;
+	--font-sans: 'Inter Variable', system-ui, sans-serif;
+
+	--color-ink-950: #08070d;
+	--color-ink-900: #0b0a10;
+	--color-ink-800: #14121d;
+	--color-ink-700: #1e1b2a;
+
+	--color-cream: #f4f1ea;
+
+	--color-violet-400: #a78bfa;
+	--color-violet-500: #8b5cf6;
+	--color-fuchsia-400: #e879f9;
+	--color-fuchsia-500: #d946ef;
+	--color-amber-300: #fcd34d;
+	--color-amber-400: #fbbf24;
+	--color-mint-400: #34d399;
+	--color-rose-400: #fb7185;
+
+	--animate-float: float 7s ease-in-out infinite;
+	--animate-float-slow: float 11s ease-in-out infinite;
+	--animate-pulse-glow: pulse-glow 3.5s ease-in-out infinite;
+	--animate-marquee: marquee 28s linear infinite;
+
+	@keyframes float {
+		0%,
+		100% {
+			transform: translateY(0) rotate(var(--float-rotate, 0deg));
+		}
+		50% {
+			transform: translateY(-18px) rotate(var(--float-rotate, 0deg));
+		}
+	}
+	@keyframes pulse-glow {
+		0%,
+		100% {
+			opacity: 0.55;
+		}
+		50% {
+			opacity: 1;
+		}
+	}
+	@keyframes marquee {
+		from {
+			transform: translateX(0);
+		}
+		to {
+			transform: translateX(-50%);
+		}
+	}
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	background: var(--color-ink-900);
+	color: var(--color-cream);
+	font-family: var(--font-sans);
+	-webkit-font-smoothing: antialiased;
+	overflow-x: clip;
+}
+
+::selection {
+	background: var(--color-violet-500);
+	color: white;
+}
+
+@utility text-gradient {
+	background: linear-gradient(
+		100deg,
+		var(--color-violet-400) 0%,
+		var(--color-fuchsia-400) 45%,
+		var(--color-amber-300) 100%
+	);
+	background-clip: text;
+	-webkit-background-clip: text;
+	color: transparent;
+}
+
+@utility card-glass {
+	background: rgb(255 255 255 / 0.035);
+	border: 1px solid rgb(255 255 255 / 0.08);
+	backdrop-filter: blur(14px);
+	border-radius: 1.5rem;
+}
+
+/* Grain overlay to kill flat-gradient banding and add texture. */
+.noise::after {
+	content: '';
+	position: fixed;
+	inset: 0;
+	z-index: 50;
+	pointer-events: none;
+	opacity: 0.05;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Scroll-reveal: elements start hidden, .revealed animates them in. */
+.reveal {
+	opacity: 0;
+	transform: translateY(24px);
+	transition:
+		opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+		transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+	transition-delay: var(--reveal-delay, 0s);
+}
+.reveal.revealed {
+	opacity: 1;
+	transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.reveal {
+		opacity: 1;
+		transform: none;
+		transition: none;
+	}
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+	}
+}

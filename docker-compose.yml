@@ -1,0 +1,23 @@
+# Standalone Docker Compose setup (alternative to the k3s deploy in infra/).
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: /app/data/confetti.db
+      PORT: 3000
+      # Public URL (required for form actions / CSRF origin check).
+      ORIGIN: ${ORIGIN}
+      PROTOCOL_HEADER: x-forwarded-proto
+      HOST_HEADER: x-forwarded-host
+      ADDRESS_HEADER: x-forwarded-for
+      XFF_DEPTH: 1
+      ADMIN_USERNAME: ${ADMIN_USERNAME:-admin}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+    volumes:
+      - data:/app/data
+    ports:
+      - '127.0.0.1:3018:3000'
+
+volumes:
+  data:

@@ -1,0 +1,85 @@
+# Production stack for festa.oconde.dev on the VPS k3s, following the
+# titan/europa pattern: image built locally on the VPS and imported into k3s.
+# The `confetti-env` secret is created out-of-band (see infra/deploy.sh / README).
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: confetti
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: confetti-data
+  namespace: confetti
+spec:
+  accessModes: [ReadWriteOnce]
+  resources: { requests: { storage: 1Gi } }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+  namespace: confetti
+spec:
+  replicas: 1
+  strategy: { type: Recreate }
+  selector: { matchLabels: { app: app } }
+  template:
+    metadata: { labels: { app: app } }
+    spec:
+      containers:
+        - name: app
+          image: confetti/app:latest
+          imagePullPolicy: Never
+          env:
+            - { name: PORT, value: "3000" }
+            - { name: DATABASE_URL, value: /app/data/confetti.db }
+            - { name: PROTOCOL_HEADER, value: x-forwarded-proto }
+            - { name: HOST_HEADER, value: x-forwarded-host }
+            - { name: ADDRESS_HEADER, value: cf-connecting-ip }
+          envFrom: [{ secretRef: { name: confetti-env } }]
+          ports: [{ containerPort: 3000 }]
+          volumeMounts: [{ name: data, mountPath: /app/data }]
+          readinessProbe:
+            httpGet: { path: /robots.txt, port: 3000 }
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          livenessProbe:
+            httpGet: { path: /robots.txt, port: 3000 }
+            initialDelaySeconds: 30
+            periodSeconds: 30
+          resources:
+            requests: { cpu: 50m, memory: 128Mi }
+            limits: { memory: 384Mi }
+      volumes:
+        - name: data
+          persistentVolumeClaim: { claimName: confetti-data }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app
+  namespace: confetti
+spec:
+  selector: { app: app }
+  ports: [{ port: 80, targetPort: 3000 }]
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: confetti
+  namespace: confetti
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  ingressClassName: traefik
+  tls:
+    - hosts: [festa.oconde.dev]
+      secretName: festa-oconde-tls
+  rules:
+    - host: festa.oconde.dev
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend: { service: { name: app, port: { number: 80 } } }
