@@ -19,7 +19,7 @@
 		{ text: 'Indo solo — respeitável.', emoji: '🕺' },
 		{ text: 'Dupla dinâmica. Aprovadíssimo.', emoji: '🤝' },
 		{ text: 'Agora é oficialmente um grupinho.', emoji: '🎶' },
-		{ text: 'Pega leve, hein… 😅', emoji: '😅' },
+		{ text: 'Pega leve, hein…', emoji: '😅' },
 		{ text: 'Tá trazendo a torcida organizada?', emoji: '📣' },
 		{ text: 'Ok, mas você ajuda a carregar o carvão.', emoji: '🪵' },
 		{ text: 'Lembrando: é um churrasco, não um festival.', emoji: '🎪' },
