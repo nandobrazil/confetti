@@ -59,13 +59,13 @@
 		content="{formatLongDate(event.startsAt)}, a partir das {formatTime(event.startsAt)}. {event.notes ?? ''} Toque para confirmar presença!"
 	/>
 	<meta property="og:url" content={page.url.origin} />
-	<meta property="og:image" content="{page.url.origin}/og.jpg" />
+	<meta property="og:image" content="{page.url.origin}/og.jpg?v=2" />
 	<meta property="og:image:width" content="1200" />
 	<meta property="og:image:height" content="630" />
 	<meta property="og:locale" content="pt_BR" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:title" content="Aniversário do {event.celebrantName} 🎉" />
-	<meta name="twitter:image" content="{page.url.origin}/og.jpg" />
+	<meta name="twitter:image" content="{page.url.origin}/og.jpg?v=2" />
 </svelte:head>
 
 <main class="relative">

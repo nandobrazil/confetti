@@ -24,7 +24,7 @@
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content="Aniversário do {event.celebrantName} 🎉" />
 	<meta property="og:description" content="Confirme sua presença — leva menos de um minuto." />
-	<meta property="og:image" content="{page.url.origin}/og.jpg" />
+	<meta property="og:image" content="{page.url.origin}/og.jpg?v=2" />
 	<meta property="og:image:width" content="1200" />
 	<meta property="og:image:height" content="630" />
 	<meta name="twitter:card" content="summary_large_image" />
