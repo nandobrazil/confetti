@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { page } from '$app/state';
 	import { reveal } from '$lib/actions/reveal';
 	import Countdown from '$lib/components/Countdown.svelte';
 	import FaqItem from '$lib/components/FaqItem.svelte';
@@ -51,6 +52,20 @@
 		name="description"
 		content="Você foi convidado para o aniversário de {event.celebrantName}. Confirme sua presença — leva menos de um minuto."
 	/>
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Aniversário do {event.celebrantName} 🎉" />
+	<meta
+		property="og:description"
+		content="{formatLongDate(event.startsAt)}, a partir das {formatTime(event.startsAt)}. {event.notes ?? ''} Toque para confirmar presença!"
+	/>
+	<meta property="og:url" content={page.url.origin} />
+	<meta property="og:image" content="{page.url.origin}/og.jpg" />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
+	<meta property="og:locale" content="pt_BR" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Aniversário do {event.celebrantName} 🎉" />
+	<meta name="twitter:image" content="{page.url.origin}/og.jpg" />
 </svelte:head>
 
 <main class="relative">

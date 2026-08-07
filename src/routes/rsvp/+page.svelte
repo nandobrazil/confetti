@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import { page } from '$app/state';
 	import { fade, fly, scale } from 'svelte/transition';
 	import Confetti from '$lib/components/Confetti.svelte';
 
@@ -20,6 +21,13 @@
 
 <svelte:head>
 	<title>Confirmar presença — aniversário de {event.celebrantName}</title>
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="Aniversário do {event.celebrantName} 🎉" />
+	<meta property="og:description" content="Confirme sua presença — leva menos de um minuto." />
+	<meta property="og:image" content="{page.url.origin}/og.jpg" />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
+	<meta name="twitter:card" content="summary_large_image" />
 </svelte:head>
 
 <main class="relative flex min-h-svh flex-col items-center px-6 py-14 sm:py-20">
