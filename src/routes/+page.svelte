@@ -21,7 +21,8 @@
 		},
 		{
 			question: 'O que vai ter pra comer?',
-			answer: 'Churrasco. E ponto. Se essa resposta não te convenceu, a festa talvez não seja pra você (brincadeira, vem).'
+			answer:
+				'Churrasco no capricho, guarnições pra acompanhar e opções veganas também — aqui é para todos os gostos, hein. A única coisa garantida: ninguém volta pra casa com fome.'
 		},
 		{
 			question: 'E se eu confirmar e não puder ir?',
