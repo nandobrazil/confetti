@@ -3,6 +3,7 @@
 	import { reveal } from '$lib/actions/reveal';
 	import Countdown from '$lib/components/Countdown.svelte';
 	import FaqItem from '$lib/components/FaqItem.svelte';
+	import { googleCalendarUrl } from '$lib/utils/calendar';
 	import { formatLongDate, formatTime, parseEventDate } from '$lib/utils/date';
 
 	let { data } = $props();
@@ -170,6 +171,29 @@
 				<h3 class="font-display text-lg font-semibold">Quando</h3>
 				<p class="mt-2 text-white/60">{formatLongDate(event.startsAt)}</p>
 				<p class="text-white/60">A partir das {formatTime(event.startsAt)}</p>
+				<p class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm font-medium">
+					<a
+						href={googleCalendarUrl(event, page.url.origin)}
+						target="_blank"
+						rel="noopener noreferrer"
+						class="inline-flex items-center gap-1.5 text-violet-400 transition-colors hover:text-violet-300"
+					>
+						Google Agenda
+						<svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M7 17 17 7M8 7h9v9" />
+						</svg>
+					</a>
+					<a
+						href="/event.ics"
+						data-sveltekit-preload-data="off"
+						class="inline-flex items-center gap-1.5 text-violet-400 transition-colors hover:text-violet-300"
+					>
+						Apple / Outlook
+						<svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M12 3v12M8 11l4 4 4-4M5 21h14" />
+						</svg>
+					</a>
+				</p>
 			</div>
 
 			<div use:reveal={80} class="card-glass p-8 transition-colors duration-300 hover:border-fuchsia-400/30">

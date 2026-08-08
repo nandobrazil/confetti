@@ -3,6 +3,7 @@
 	import { page } from '$app/state';
 	import { fade, fly, scale } from 'svelte/transition';
 	import Confetti from '$lib/components/Confetti.svelte';
+	import { googleCalendarUrl } from '$lib/utils/calendar';
 
 	let { data, form } = $props();
 	const event = $derived(data.event);
@@ -131,6 +132,36 @@
 					Voltar ao convite
 				</a>
 			</div>
+			{#if form?.attending}
+				<div class="mt-8 flex flex-col items-center gap-3">
+					<p class="text-xs font-medium tracking-[0.2em] text-white/35 uppercase">
+						Marca na agenda pra não dar desculpa depois
+					</p>
+					<div class="flex flex-wrap items-center justify-center gap-3">
+						<a
+							href={googleCalendarUrl(event, page.url.origin)}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="card-glass inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium text-white/75 transition-all duration-300 hover:scale-[1.03] hover:border-white/20 hover:text-white"
+						>
+							<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18M12 14v4M10 16h4" />
+							</svg>
+							Google Agenda
+						</a>
+						<a
+							href="/event.ics"
+							data-sveltekit-preload-data="off"
+							class="card-glass inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium text-white/75 transition-all duration-300 hover:scale-[1.03] hover:border-white/20 hover:text-white"
+						>
+							<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18M12 13v6M9 16l3 3 3-3" />
+							</svg>
+							Apple / Outlook
+						</a>
+					</div>
+				</div>
+			{/if}
 		</div>
 	{:else}
 		<a
