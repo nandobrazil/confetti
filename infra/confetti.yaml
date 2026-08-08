@@ -22,7 +22,11 @@ metadata:
   namespace: confetti
 spec:
   replicas: 1
-  strategy: { type: Recreate }
+  # Zero-downtime rollouts: the new pod becomes ready before the old one dies.
+  # Safe with SQLite: both pods share the same WAL-mode file on the same node.
+  strategy:
+    type: RollingUpdate
+    rollingUpdate: { maxSurge: 1, maxUnavailable: 0 }
   selector: { matchLabels: { app: app } }
   template:
     metadata: { labels: { app: app } }
